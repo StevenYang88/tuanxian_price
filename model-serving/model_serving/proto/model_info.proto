@@ -1,0 +1,54 @@
+/*
+ *
+ * Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved
+ * 
+ */ 
+syntax = "proto2";
+package model_info;
+message FormatMap {
+    required string id = 1;
+    required int32 index = 2;
+    optional string debug_doc = 3;
+    optional string group = 4;
+    optional string id_in_group = 5;
+    optional int32 index_in_group = 6;
+}
+message FormatTable {
+    required int32 size = 1;
+    repeated FormatMap values = 2;
+}
+enum ModelType {
+    model_error = 0;
+    insurance_price = 1;
+}
+message ModelInfo {
+    required ModelType model_type = 1;
+    required string model_path = 2;
+}
+
+message InsurancePricePredictionRequest {
+    required string request_id = 1;
+    optional string company = 2;
+    optional string policy = 3;
+    optional int32  coverage = 4;
+    optional int32  industry = 5;
+    optional int32  occupation = 6;
+    optional string city = 7;
+    optional int32  num = 8;
+    optional float amount = 9;
+    optional float avg_age = 10;
+    optional float  sex_ratio = 11;
+}
+message InsurancePriceResponseData {
+    optional float risk_ratio = 1;
+    optional float avg_pay = 2;
+    optional float avg_claim = 3;
+    optional float avg_days = 4;
+}
+message InsurancePricePredictionResponse {
+    required string response_id = 1;
+    optional string code = 2;
+    optional string message = 3;
+    optional InsurancePriceResponseData data = 4;
+}
+
